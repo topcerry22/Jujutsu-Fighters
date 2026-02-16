@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUJUTSU KAISEN: DOMAIN CLASH - ULTIMATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Rajdhani', sans-serif; background: #050505; color: #fff; overflow: hidden; user-select: none; }
+        
+        #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; transition: background 0.5s; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* Loading Screen */
+        #loadingScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #loadingScreen h2 { font-size: 2em; color: #ff0844; animation: pulse 1s infinite; }
+        
+        /* Title & Screens */
+        .title { font-family: 'Orbitron'; font-size: 4em; font-weight: 900; letter-spacing: 6px; margin-bottom: 10px; background: linear-gradient(135deg, #ff0844, #ffb199, #ff0844); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: titleGlow 2s ease-in-out infinite; text-align: center; }
+        @keyframes titleGlow { 0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 8, 68, 0.5)); } 50% { filter: drop-shadow(0 0 40px rgba(255, 8, 68, 0.8)); } }
+        
+        #modeScreen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #selectionScreen, #mapScreen { display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; }
+        
+        .modes-grid, .characters-grid, .maps-grid { display: grid; gap: 15px; padding: 20px; }
+        .modes-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 1000px; }
+        .characters-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); max-width: 1200px; max-height: 60vh; overflow-y: auto; background: rgba(20, 0, 10, 0.8); border: 2px solid rgba(255, 8, 68, 0.3); border-radius: 20px; }
+        .maps-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); max-width: 1000px; }
+        
+        .mode-card, .character-card, .map-card { background: linear-gradient(135deg, rgba(30, 10, 20, 0.95), rgba(50, 10, 30, 0.95)); border: 2px solid rgba(255, 8, 68, 0.3); border-radius: 12px; padding: 20px; cursor: pointer; transition: 0.2s; text-align: center; }
+        .mode-card:hover, .character-card:hover, .map-card:hover { transform: translateY(-5px); border-color: #ff0844; box-shadow: 0 5px 20px rgba(255, 8, 68, 0.6); }
+        .character-card.selected, .map-card.selected { border: 3px solid #00ff88; box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+        
+        .mode-icon, .character-portrait, .map-preview { font-size: 3em; margin-bottom: 10px; }
+        .mode-name, .character-name, .map-name { font-weight: 900; font-size: 1.2em; color: #ff0844; }
+        
+        /* Game Screen */
+        #gameScreen { display: none; width: 100%; height: 100vh; }
+        #gameCanvas { display: block; width: 1200px; height: 600px; background: rgba(0,0,0,0.5); border: 4px solid #333; margin: 0 auto; border-radius: 10px; }
+        
+        /* HUD */
+        .hud { width: 1200px; margin: 10px auto; }
+        .top-hud { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .round-info, .coins-display { font-size: 1.5em; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        
+        .health-bars { display: flex; justify-content: space-between; gap: 40px; margin-bottom: 10px; }
+        .health-group { flex: 1; }
+        .health-label { font-size: 1.2em; font-weight: 900; margin-bottom: 5px; display: flex; justify-content: space-between; text-shadow: 2px 2px 0 #000; }
+        .health-bar-outer, .stamina-bar-outer, .ultimate-bar-outer { height: 25px; background: rgba(0,0,0,0.8); border: 2px solid #555; border-radius: 12px; overflow: hidden; }
+        .stamina-bar-outer { height: 8px; margin-top: 3px; }
+        .ultimate-bar-outer { height: 8px; margin-top: 5px; }
+        .health-bar-inner { height: 100%; transition: width 0.2s; }
+        .health-bar-inner.player { background: linear-gradient(90deg, #00ff88, #00cc66); }
+        .health-bar-inner.enemy { background: linear-gradient(90deg, #ff0844, #ff6b9d); }
+        .stamina-bar-inner { height: 100%; background: linear-gradient(90deg, #00ff88, #00aa66); width: 100%; transition: width 0.1s; }
+        .ultimate-bar-inner { height: 100%; background: linear-gradient(90deg, #ffd700, #ffaa00); width: 0%; transition: width 0.2s; }
+        
+        .moves-bar { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; max-width: 1200px; margin: 5px auto; }
+        .move-slot { background: rgba(20,20,20,0.9); border: 1px solid #555; border-radius: 6px; padding: 6px; text-align: center; transition: 0.2s; }
+        .move-slot.cooldown { opacity: 0.4; }
+        .move-slot.ready-ult { border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); animation: pulse 1s infinite; }
+        .move-slot.active { border-color: #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.6); }
+        .move-name { font-weight: bold; font-size: 0.75em; }
+        .move-slot-key { font-size: 0.65em; color: #999; background: #000; padding: 2px 5px; border-radius: 4px; margin-top: 2px; }
+        
+        .controls-footer { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); padding: 12px 30px; border-radius: 10px; border: 1px solid #555; font-size: 0.85em; }
+        .controls-footer span { margin: 0 10px; color: #aaa; }
+        .controls-footer b { color: #ff0844; }
+        
+        .combo-display { font-size: 2.5em; font-weight: 900; color: #ffd700; text-shadow: 0 0 15px #ffd700; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: comboPulse 0.3s; pointer-events: none; display: none; }
+        @keyframes comboPulse { 0% { transform: translate(-50%, -50%) scale(0.5); } 50% { transform: translate(-50%, -50%) scale(1.2); } 100% { transform: translate(-50%, -50%) scale(1); } }
+        
+        /* Overlays */
+        #shopScreen, #gameOver, #domainOverlay { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 0, 5, 0.98); border: 4px solid #ff0844; border-radius: 20px; padding: 40px; z-index: 100; text-align: center; }
+        #domainOverlay { width: 100vw; height: 100vh; background: transparent; border: none; pointer-events: none; z-index: 50; align-items: center; justify-content: center; }
+        #domainText { font-family: 'Orbitron'; font-size: 5em; font-weight: 900; color: #fff; text-shadow: 0 0 30px currentColor; opacity: 0; animation: domainFlash 3s forwards; }
+        
+        button { font-family: 'Orbitron'; font-size: 1.2em; padding: 12px 35px; background: linear-gradient(135deg, #ff0844, #aa0000); border: 2px solid #fff; color: white; cursor: pointer; clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); margin: 10px; transition: 0.2s; }
+        button:hover { transform: scale(1.1); filter: brightness(1.2); }
+        button.secondary { background: linear-gradient(135deg, #333, #555); }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse { 0% { border-color: #ffd700; } 50% { border-color: #fff; } 100% { border-color: #ffd700; } }
+        @keyframes domainFlash { 0% { opacity: 0; transform: scale(0.5); } 20% { opacity: 1; transform: scale(1.2); } 80% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.5); } }
+    </style>
+</head>
+<body>
+    <canvas id="bgCanvas"></canvas>
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <h2>LOADING CURSED ENERGY...</h2>
+    </div>
+    
+    <div class="container">
+        <!-- Mode Selection -->
+        <div id="modeScreen" style="display:none;">
+            <h1 class="title">JUJUTSU KAISEN</h1>
+            <p style="font-size: 1.5em; color: #aaa; margin-bottom: 40px;">DOMAIN CLASH</p>
+            <div class="modes-grid" id="modesContainer"></div>
+        </div>
+
+        <!-- Character Selection -->
+        <div id="selectionScreen">
+            <h2 style="font-size: 2em; color: #ff0844; margin-bottom: 10px;" id="selectionTitle">SELECT CHARACTER</h2>
+            <div class="characters-grid" id="charactersContainer"></div>
+            <button onclick="confirmSelection()">CONTINUE</button>
+            <button class="secondary" onclick="backToModes()">BACK</button>
+        </div>
+
+        <!-- Map Selection -->
+        <div id="mapScreen">
+            <h2 style="font-size: 2em; color: #ff0844; margin-bottom: 20px;">SELECT BATTLEFIELD</h2>
+            <div class="maps-grid" id="mapsContainer"></div>
+            <button onclick="startBattle()">START BATTLE</button>
+            <button class="secondary" onclick="backToSelection()">BACK</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen">
+            <div id="domainOverlay"><div id="domainText">DOMAIN EXPANSION</div></div>
+            <div id="comboDisplay" class="combo-display"></div>
+
+            <div class="hud">
+                <div class="top-hud">
+                    <div class="round-info" id="roundInfo">ROUND 1</div>
+                    <div class="coins-display" id="coinsDisplay">💰 0</div>
+                </div>
+                <div class="health-bars" id="healthBarsContainer"></div>
+                <div class="moves-bar" id="movesBar"></div>
+            </div>
+            <canvas id="gameCanvas" width="1200" height="600"></canvas>
+            
+            <div class="controls-footer">
+                <span><b>WASD</b>: Move</span>
+                <span><b>SHIFT</b>: Block/Parry</span>
+                <span><b>SPACE</b>: Dodge</span>
+                <span><b>J/K/L/;/'</b>: Attacks</span>
+                <span><b>U/I/O</b>: Specials</span>
+                <span><b>P</b>: Ultimate</span>
+            </div>
+        </div>
+
+        <!-- Shop -->
+        <div id="shopScreen">
+            <h2>💰 CURSED ENERGY SHOP</h2>
+            <div id="shopItems" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0;"></div>
+            <button onclick="closeShop()">NEXT BATTLE</button>
+        </div>
+
+        <!-- Game Over -->
+        <div id="gameOver">
+            <h2 id="gameOverTitle">EXORCISED</h2>
+            <p id="gameOverText" style="margin: 20px 0; font-size: 1.2em;"></p>
+            <button onclick="location.reload()">MAIN MENU</button>
+        </div>
+    </div>
+
+<script>
+// ========== LOAD JSON DATA ==========
+let CHARACTERS = [];
+let MAPS = [];
+let SHOP_ITEMS = [];
+
+async function loadGameData() {
+    try {
+        const [charactersRes, mapsRes, shopRes] = await Promise.all([
+            fetch('characters.json'),
+            fetch('maps.json'),
+            fetch('shop.json')
+        ]);
+        
+        CHARACTERS = await charactersRes.json();
+        MAPS = await mapsRes.json();
+        SHOP_ITEMS = await shopRes.json();
+        
+        console.log(`Loaded ${CHARACTERS.length} characters, ${MAPS.length} maps, ${SHOP_ITEMS.length} shop items`);
+        initializeGame();
+    } catch (error) {
+        console.error('Error loading game data:', error);
+        document.getElementById('loadingScreen').innerHTML = '<h2 style="color: #ff0000;">ERROR: Could not load game data!<br>Make sure characters.json, maps.json, and shop.json are in the same folder.</h2>';
+    }
+}
+
+// Start loading immediately
+loadGameData();
+
+// Game code continues...

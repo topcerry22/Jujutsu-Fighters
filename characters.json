@@ -1,0 +1,467 @@
+[
+  {
+    "id": "gojo",
+    "name": "SATORU GOJO",
+    "title": "The Strongest",
+    "icon": "👁️",
+    "color": "#00bfff",
+    "domainColor": "#0a0a2a",
+    "speed": 6.5,
+    "defense": 5,
+    "attack": 8,
+    "moves": {
+      "light": {
+        "name": "Infinity Palm",
+        "dmg": 9,
+        "cd": 0.25,
+        "type": "melee",
+        "hitstun": 10,
+        "range": 70,
+        "color": "#00bfff"
+      },
+      "heavy": {
+        "name": "Limitless Barrage",
+        "dmg": 26,
+        "cd": 1.5,
+        "type": "melee",
+        "hitstun": 22,
+        "guardBreak": true,
+        "range": 100,
+        "color": "#0088ff"
+      },
+      "sweep": {
+        "name": "Infinity Sweep",
+        "dmg": 17,
+        "cd": 1.0,
+        "type": "melee",
+        "trip": true,
+        "hitstun": 16,
+        "range": 85,
+        "color": "#00aaff"
+      },
+      "antiair": {
+        "name": "Ascension Blue",
+        "dmg": 21,
+        "cd": 1.3,
+        "type": "melee",
+        "launch": true,
+        "hitstun": 26,
+        "range": 90,
+        "color": "#0066ff"
+      },
+      "lunge": {
+        "name": "Teleport Strike",
+        "dmg": 24,
+        "cd": 1.6,
+        "type": "dash_attack",
+        "teleport": true,
+        "hitstun": 20,
+        "range": 220,
+        "color": "#00ddff"
+      },
+      "special1": {
+        "name": "Cursed Blue",
+        "dmg": 35,
+        "cd": 4,
+        "type": "projectile",
+        "pull": true,
+        "color": "#0066ff"
+      },
+      "special2": {
+        "name": "Reversal Red",
+        "dmg": 50,
+        "cd": 6,
+        "type": "projectile",
+        "knockback": 150,
+        "color": "#ff0033"
+      },
+      "support": {
+        "name": "Infinity",
+        "cd": 12,
+        "type": "buff",
+        "shield": true,
+        "duration": 3,
+        "color": "#fff"
+      },
+      "ultimate": {
+        "name": "UNLIMITED VOID",
+        "dmg": 20,
+        "type": "domain",
+        "effect": "stun",
+        "duration": 4,
+        "color": "#ffffff"
+      }
+    }
+  },
+  {
+    "id": "sukuna",
+    "name": "RYOMEN SUKUNA",
+    "title": "King of Curses",
+    "icon": "👹",
+    "color": "#ff0033",
+    "domainColor": "#2a0a0a",
+    "speed": 6,
+    "defense": 7,
+    "attack": 10,
+    "moves": {
+      "light": {
+        "name": "Rapid Slash",
+        "dmg": 11,
+        "cd": 0.22,
+        "type": "melee",
+        "hitstun": 11,
+        "range": 75,
+        "color": "#ff0033"
+      },
+      "heavy": {
+        "name": "Brutal Cleave",
+        "dmg": 30,
+        "cd": 1.7,
+        "type": "melee",
+        "slash": true,
+        "guardBreak": true,
+        "hitstun": 24,
+        "range": 110,
+        "color": "#cc0000"
+      },
+      "sweep": {
+        "name": "Leg Cutter",
+        "dmg": 19,
+        "cd": 1.1,
+        "type": "melee",
+        "trip": true,
+        "slash": true,
+        "hitstun": 17,
+        "range": 90,
+        "color": "#990000"
+      },
+      "antiair": {
+        "name": "Rising Slash",
+        "dmg": 23,
+        "cd": 1.4,
+        "type": "melee",
+        "launch": true,
+        "slash": true,
+        "hitstun": 28,
+        "range": 95,
+        "color": "#cc0033"
+      },
+      "lunge": {
+        "name": "Spiderleg Lunge",
+        "dmg": 27,
+        "cd": 1.8,
+        "type": "dash_attack",
+        "multi": 2,
+        "hitstun": 22,
+        "range": 180,
+        "color": "#ff0066"
+      },
+      "special1": {
+        "name": "Dismantle",
+        "dmg": 40,
+        "cd": 5,
+        "type": "projectile",
+        "multi": 3,
+        "color": "#990000"
+      },
+      "special2": {
+        "name": "Divine Flame",
+        "dmg": 60,
+        "cd": 8,
+        "type": "projectile",
+        "burn": true,
+        "color": "#ff6600"
+      },
+      "support": {
+        "name": "Domain Amp",
+        "cd": 12,
+        "type": "buff",
+        "damageBoost": 1.5,
+        "duration": 4,
+        "color": "#aa0000"
+      },
+      "ultimate": {
+        "name": "MALEVOLENT SHRINE",
+        "dmg": 250,
+        "type": "domain",
+        "effect": "dot",
+        "color": "#660000"
+      }
+    }
+  },
+  {
+    "id": "yuji",
+    "name": "YUJI ITADORI",
+    "title": "The Tiger",
+    "icon": "🥊",
+    "color": "#ff6b00",
+    "speed": 7.5,
+    "defense": 6,
+    "attack": 7,
+    "moves": {
+      "light": {
+        "name": "Speed Jab",
+        "dmg": 9,
+        "cd": 0.18,
+        "type": "melee",
+        "hitstun": 9,
+        "range": 65,
+        "color": "#ff6b00"
+      },
+      "heavy": {
+        "name": "Tiger Fist",
+        "dmg": 24,
+        "cd": 1.3,
+        "type": "melee",
+        "hits": 2,
+        "guardBreak": true,
+        "hitstun": 20,
+        "range": 90,
+        "color": "#ff4400"
+      },
+      "sweep": {
+        "name": "Leg Sweep",
+        "dmg": 16,
+        "cd": 0.9,
+        "type": "melee",
+        "trip": true,
+        "hitstun": 15,
+        "range": 80,
+        "color": "#ff5500"
+      },
+      "antiair": {
+        "name": "Uppercut",
+        "dmg": 20,
+        "cd": 1.2,
+        "type": "melee",
+        "launch": true,
+        "hitstun": 25,
+        "range": 75,
+        "color": "#ff7700"
+      },
+      "lunge": {
+        "name": "Flying Knee",
+        "dmg": 23,
+        "cd": 1.4,
+        "type": "dash_attack",
+        "hitstun": 19,
+        "knockback": 100,
+        "range": 160,
+        "color": "#ff8800"
+      },
+      "special1": {
+        "name": "Manji Kick",
+        "dmg": 35,
+        "cd": 4,
+        "type": "melee",
+        "knockback": 120,
+        "color": "#ff8800"
+      },
+      "special2": {
+        "name": "Black Flash",
+        "dmg": 70,
+        "cd": 8,
+        "type": "melee",
+        "crit": true,
+        "color": "#000"
+      },
+      "support": {
+        "name": "Focus",
+        "cd": 10,
+        "type": "buff",
+        "speedBoost": 1.5,
+        "duration": 5,
+        "color": "#fff"
+      },
+      "ultimate": {
+        "name": "RAGE MODE",
+        "dmg": 0,
+        "type": "buff",
+        "damageBoost": 3,
+        "duration": 8,
+        "color": "#ff0000"
+      }
+    }
+  },
+  {
+    "id": "megumi",
+    "name": "MEGUMI FUSHIGURO",
+    "title": "Ten Shadows",
+    "icon": "🐺",
+    "color": "#4a5568",
+    "domainColor": "#1a202c",
+    "speed": 6,
+    "defense": 5,
+    "attack": 6,
+    "moves": {
+      "light": {
+        "name": "Shadow Jab",
+        "dmg": 8,
+        "cd": 0.28,
+        "type": "melee",
+        "hitstun": 10,
+        "range": 70,
+        "color": "#4a5568"
+      },
+      "heavy": {
+        "name": "Shadow Hammer",
+        "dmg": 22,
+        "cd": 1.5,
+        "type": "melee",
+        "guardBreak": true,
+        "hitstun": 20,
+        "range": 95,
+        "color": "#2d3748"
+      },
+      "sweep": {
+        "name": "Shadow Sweep",
+        "dmg": 15,
+        "cd": 1.0,
+        "type": "melee",
+        "trip": true,
+        "hitstun": 15,
+        "range": 80,
+        "color": "#1a202c"
+      },
+      "antiair": {
+        "name": "Shadow Rising",
+        "dmg": 19,
+        "cd": 1.2,
+        "type": "melee",
+        "launch": true,
+        "hitstun": 24,
+        "range": 85,
+        "color": "#4a5568"
+      },
+      "lunge": {
+        "name": "Shadow Step",
+        "dmg": 21,
+        "cd": 1.5,
+        "type": "dash_attack",
+        "teleport": true,
+        "hitstun": 18,
+        "range": 180,
+        "color": "#2d3748"
+      },
+      "special1": {
+        "name": "Divine Dog",
+        "dmg": 30,
+        "cd": 6,
+        "type": "summon",
+        "color": "#000"
+      },
+      "special2": {
+        "name": "Nue",
+        "dmg": 40,
+        "cd": 7,
+        "type": "projectile",
+        "stun": 1,
+        "color": "#ffd700"
+      },
+      "support": {
+        "name": "Rabbit Escape",
+        "cd": 10,
+        "type": "dodge",
+        "invuln": 2,
+        "color": "#fff"
+      },
+      "ultimate": {
+        "name": "CHIMERA SHADOW GARDEN",
+        "dmg": 150,
+        "type": "domain",
+        "effect": "summon_swarm",
+        "color": "#1a202c"
+      }
+    }
+  },
+  {
+    "id": "nobara",
+    "name": "NOBARA KUGISAKI",
+    "title": "Straw Doll",
+    "icon": "🔨",
+    "color": "#ff69b4",
+    "speed": 5.5,
+    "defense": 4,
+    "attack": 7,
+    "moves": {
+      "light": {
+        "name": "Nail Strike",
+        "dmg": 9,
+        "cd": 0.3,
+        "type": "melee",
+        "hitstun": 10,
+        "range": 65,
+        "color": "#ff69b4"
+      },
+      "heavy": {
+        "name": "Hammer Smash",
+        "dmg": 26,
+        "cd": 1.6,
+        "type": "melee",
+        "guardBreak": true,
+        "stun": 0.5,
+        "hitstun": 22,
+        "range": 85,
+        "color": "#ff1493"
+      },
+      "sweep": {
+        "name": "Low Nail",
+        "dmg": 17,
+        "cd": 1.0,
+        "type": "melee",
+        "trip": true,
+        "hitstun": 16,
+        "range": 75,
+        "color": "#dc143c"
+      },
+      "antiair": {
+        "name": "Rising Hammer",
+        "dmg": 20,
+        "cd": 1.3,
+        "type": "melee",
+        "launch": true,
+        "hitstun": 25,
+        "range": 80,
+        "color": "#ff1493"
+      },
+      "lunge": {
+        "name": "Nail Rush",
+        "dmg": 23,
+        "cd": 1.5,
+        "type": "dash_attack",
+        "hitstun": 19,
+        "range": 150,
+        "color": "#c71585"
+      },
+      "special1": {
+        "name": "Hairpin",
+        "dmg": 35,
+        "cd": 4,
+        "type": "projectile",
+        "color": "#dc143c"
+      },
+      "special2": {
+        "name": "Resonance",
+        "dmg": 50,
+        "cd": 7,
+        "type": "delayed",
+        "delay": 1,
+        "color": "#c71585"
+      },
+      "support": {
+        "name": "Straw Doll",
+        "cd": 9,
+        "type": "buff",
+        "damageBoost": 1.3,
+        "duration": 5,
+        "color": "#ff1493"
+      },
+      "ultimate": {
+        "name": "MAXIMUM OUTPUT",
+        "dmg": 140,
+        "type": "beam",
+        "color": "#ff0066"
+      }
+    }
+  }
+]
